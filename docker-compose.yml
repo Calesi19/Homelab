@@ -56,8 +56,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ./config/sonarr:/config
-      - /mnt/immich_data/media/tv:/tv
-      - /mnt/immich_data/media/downloads:/downloads
+      # single parent mount so *arr can hardlink imports (no extra disk use)
+      - /mnt/immich_data/media:/media
     restart: unless-stopped
 
   radarr:
@@ -72,8 +72,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ./config/radarr:/config
-      - /mnt/immich_data/media/movies:/movies
-      - /mnt/immich_data/media/downloads:/downloads
+      # single parent mount so *arr can hardlink imports (no extra disk use)
+      - /mnt/immich_data/media:/media
     restart: unless-stopped
 
   prowlarr:
